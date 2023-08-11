@@ -8,7 +8,6 @@ class sprite:
 
     def __init__(self, images, colorkey = None, size = (100,100)):
         self.animation_list = []
-
         self.image_pointer = 0
 
         for image in images:
