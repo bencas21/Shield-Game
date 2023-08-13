@@ -4,6 +4,7 @@ from ArrowKeyController import arrow_key_controller
 class shield(pygame.sprite.Sprite):
 
     def __init__(self, image, size, player_x, player_y):
+        super(shield,self).__init__()
         # Load the image
         self.__image_load = pygame.image.load(image).convert()
         self.__image_load = pygame.transform.scale(self.__image_load, size).convert()

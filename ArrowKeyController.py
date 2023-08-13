@@ -1,8 +1,5 @@
-import threading
-
 import pygame
-import time
-from threading import Thread
+
 
 class arrow_key_controller:
     def __init__(self):
