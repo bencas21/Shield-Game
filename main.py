@@ -2,6 +2,7 @@ import pygame
 from FireBall import fire_ball
 from Shield import shield
 from Player import player
+from FireBallManager import fire_ball_manager
 
 # pygame setup
 pygame.init()
@@ -21,7 +22,7 @@ ShieldAni = shield('Images/Shield Down.png', (80, 20), CharacterAni.get_rect().c
 single_fire_ball = fire_ball(['Images/Fire1.png', 'Images/Fire2.png',
                'Images/Fire3.png'],(35,35),screen,'black')
 
-
+fireballs = fire_ball_manager(1,screen)
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -39,10 +40,7 @@ while running:
     CharacterAni.update_player_display(screen)
     ShieldAni.update_shield(screen)
 
-    if (single_fire_ball.get_rect().colliderect(ShieldAni.get_rect())):
-        single_fire_ball.kill()
-    else:
-        single_fire_ball.shoot(screen)
+    fireballs.shoot_fire_balls()
 
     # flip() the display to put your work on screen
     pygame.display.flip()
