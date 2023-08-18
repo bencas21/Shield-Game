@@ -19,10 +19,9 @@ CharacterAni = player(['Images/CharacterFB.png', 'Images/CharacterFF.png',
 ShieldAni = shield('Images/Shield Down.png', (80, 20), CharacterAni.get_rect().center[0],
                    CharacterAni.get_rect().center[1])
 
-single_fire_ball = fire_ball(['Images/Fire1.png', 'Images/Fire2.png',
-               'Images/Fire3.png'],(35,35),screen,'black')
+fireballs = fire_ball_manager(1, screen)
 
-fireballs = fire_ball_manager(1,screen)
+
 while running:
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
@@ -39,7 +38,6 @@ while running:
 
     CharacterAni.update_player_display(screen)
     ShieldAni.update_shield(screen)
-
     fireballs.shoot_fire_balls()
 
     # flip() the display to put your work on screen

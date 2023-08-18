@@ -5,14 +5,17 @@ from threading import Thread
 
 
 class fire_ball(pygame.sprite.Sprite):
-    def __init__(self, images, size, screen, speed, colorkey=None):
+    def __init__(self, images, size, screen, speed,colorkey=None):
 
         super().__init__()
+
         # Fire ball speed
         self.__speed = speed
 
         # Whether or not fireball is active in the game
         self.active = True
+
+        self.shot_yet = False
 
         # random start position
         position_dict = {'Top': [screen.get_width() / 2, 0],
@@ -67,15 +70,21 @@ class fire_ball(pygame.sprite.Sprite):
 
     # shoot fire ball according to speed
     def shoot(self, screen):
-        if self.__start_position == 'Top':
-            self.__rect.y += self.__speed
-        elif self.__start_position == 'Bottom':
-            self.__rect.y -= self.__speed
-        elif self.__start_position == 'Left':
-            self.__rect.x += self.__speed
-        elif self.__start_position == 'Right':
-            self.__rect.x -= self.__speed
-        screen.blit(self.__current_image, self.__rect)
+        if(self.active):
+            if self.__start_position == 'Top':
+                self.__rect.y += self.__speed
+            elif self.__start_position == 'Bottom':
+                self.__rect.y -= self.__speed
+            elif self.__start_position == 'Left':
+                self.__rect.x += self.__speed
+            elif self.__start_position == 'Right':
+                self.__rect.x -= self.__speed
+            screen.blit(self.__current_image, self.__rect)
+            self.shot_yet = True
+
+
 
     def get_rect(self):
         return self.__rect
+
+

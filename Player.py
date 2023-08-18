@@ -2,7 +2,6 @@
 from ArrowKeyController import arrow_key_controller
 import pygame
 
-
 class player(pygame.sprite.Sprite):
     def __init__(self, images, colorkey = None, size = (100,100), position = (50,50)):
 
@@ -45,25 +44,6 @@ class player(pygame.sprite.Sprite):
     def get_rect(self):
         return self.__rect
 
-
-
-
-
-
-
-
-    """ 
-
-
-
-
-    def get_image_pointer(self):
-        return self.image_pointer
-
-    def get_current_image(self):
-        return self.animation_list[self.image_pointer]
-        
-    """
 
 
 
