@@ -82,6 +82,16 @@ class fire_ball(pygame.sprite.Sprite):
             screen.blit(self.__current_image, self.__rect)
             self.shot_yet = True
 
+    # Used for fireball events
+    def hit_player_or_shield(self, player_rect, shield_rect):
+        if self.__rect.colliderect(player_rect):
+            return 'Player Hit'
+        elif self.__rect.colliderect(shield_rect):
+            return 'Shield Hit'
+        else:
+            return 'No'
+
+
 
 
     def get_rect(self):

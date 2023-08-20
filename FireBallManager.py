@@ -1,3 +1,5 @@
+import math
+
 import pygame
 import random
 import time
@@ -16,15 +18,16 @@ class fire_ball_manager():
         self.fire_balls = pygame.sprite.Group()
 
         # random fireball count for fireballs
-        start_for_rand_count = level
+        start_for_rand_count = level * 2
         end_for_rand_count = start_for_rand_count * 2
         fire_ball_count = random.randint(start_for_rand_count, end_for_rand_count)
 
         # for each fireball determine a random speed
         for i in range(fire_ball_count):
-            start_for_rand_speed = level * 0.5
-            end_for_rand_speed = level
+            start_for_rand_speed =math.ceil(level * 0.1)
+            end_for_rand_speed = math.ceil(level * 0.3)
             fire_ball_speed = random.uniform(start_for_rand_speed, end_for_rand_speed)
+
 
             fire_ball_temp = fire_ball(['Images/Fire1.png', 'Images/Fire2.png',
                                         'Images/Fire3.png'], (35, 35), screen, fire_ball_speed, 'black')
@@ -38,12 +41,32 @@ class fire_ball_manager():
     def __first_shot_balls(self):
         for ball in self.fire_balls:
             ball.shoot(self.__screen)
-            time.sleep(random.uniform(0.05, 1))
+            time.sleep(random.uniform(3/(self.__level), 6/(self.__level)))
 
     # shoot fireballs normal
-    def shoot_fire_balls(self):
+    def shoot_fire_balls(self,player_rect,shield_rect):
+        if len(self.fire_balls.sprites()) == 0:
+            return 'Next Level'
         for ball in self.fire_balls:
             if ball.shot_yet and ball.active:
                 ball.shoot(self.__screen)
+
+                # Fireball events
+                if ball.hit_player_or_shield(player_rect, shield_rect) == 'Player Hit':
+                    ball.kill()
+                    ball.active = False
+                    return 'Hit'
+                if ball.hit_player_or_shield(player_rect, shield_rect) == 'Shield Hit':
+                    ball.kill()
+                    ball.active = False
+                    return 'Blocked'
+
+        return 'None'
+
+
+
+
+
+
 
 

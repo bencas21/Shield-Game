@@ -19,5 +19,5 @@ class player_stats:
     def lose_health(self):
         self.__health -= 1
 
-    def score(self):
+    def score_up(self):
         self.__score +=1
