@@ -20,7 +20,7 @@ ShieldAni = shield('Images/Shield Down.png', (80, 20), CharacterAni.get_rect().c
                    CharacterAni.get_rect().center[1])
 
 # Player Stats class
-stats = player_stats()
+stats = player_stats(screen)
 
 while running:
 
@@ -55,10 +55,13 @@ while running:
         else:
             pass
 
+        if stats.get_health() <= 0:
+            running = False
+            break
         # Update character and shield directions
         CharacterAni.update_player_display(screen)
         ShieldAni.update_shield(screen)
-
+        stats.display_stats()
         # flip() the display to put your work on screen
         pygame.display.flip()
 
